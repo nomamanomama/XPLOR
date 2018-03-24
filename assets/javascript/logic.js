@@ -127,6 +127,7 @@ autoplay();
                     var eventName = json._embedded.events[i].name;
                     var eventDate = json._embedded.events[i].dates.start.localDate;
                     var eventLink = json._embedded.events[i].url;
+                    var shareLink = "https://www.facebook.com/sharer/sharer.php?u=example.org";
                     var eventImage = json._embedded.events[i].images[i].url;
                     var eventDate = json._embedded.events[i].dates.start.localDate;
                     var eventVenue = json._embedded.events[i]._embedded.venues[0].name;
@@ -175,7 +176,7 @@ autoplay();
 
                     var tmA2Info = $("<a>");
                     tmA2Info.addClass("btn waves-effect waves-teal align-center tm-ticket-btn");
-                    tmA2Info.attr("href", eventLink);
+                    tmA2Info.attr("href", shareLink);
                     tmA2Info.attr("target", "_blank");
                     tmA2Info.text("TELL FRIENDS");
 

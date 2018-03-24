@@ -35,27 +35,39 @@
                     <a class="modal-trigger" href="#loginmodal">LOG IN</a>
                 </li>
                 <li>
-                    <a href="./index.html">HOME</a>
-                </li>
-                <li>
-                    <a href="#">SETTINGS</a>
-                </li>
-            </ul>
-            <!-- mobile side menu, needs jquery to initialize -->
-            <ul id="mobile-side-nav" class="side-nav">
-                <li>
-                    <a href="#">LOG IN</a>
-                </li>
-                <li>
                     <a href="./about.html">ABOUT</a>
                 </li>
                 <li>
-                    <a href="#">SETTINGS</a>
+                    <a href="./settings.html">SETTINGS</a>
                 </li>
             </ul>
         </div>
     </nav>
-
+    <!-- mobile side menu, needs jquery to initialize -->
+    <ul id="mobile-side-nav" class="side-nav">
+        <li>
+            <a href="#">LOG IN</a>
+        </li>
+        <li>
+            <a href="./index.html">HOME</a>
+        </li>
+        <li>
+            <a href="#">SETTINGS</a>
+        </li>
+    </ul>
+    <!-- mobile side menu, needs jquery to initialize -->
+    <ul id="mobile-side-nav" class="side-nav">
+        <li>
+            <a href="modal-trigger">LOG IN</a>
+        </li>
+        <li>
+            <a href="./index.html">HOME</a>
+        </li>
+        <li>
+            <a href="./settings.html">SETTINGS</a>
+        </li>
+    </ul>
+    </header>
     <!-- team member cards -->
     <div class="container">
         <div class="row">
@@ -72,8 +84,8 @@
                         </div>
                         <div class="card-content">
                             <span class="card-title" id="Name1">Rebecca Gemeinhardt</span>
-                            <p>I am an ambitious graphic designer with extensive experience and education. I am currently searching for my happy place at the
-                                intersection of design and development. </p>
+                            <p>I am an ambitious graphic designer with extensive experience and education. I am currently searching
+                                for my happy place at the intersection of design and development. </p>
                         </div>
                         <div class="card-action">
                             <div>
@@ -108,7 +120,9 @@
                         </div>
                         <div class="card-content">
                             <span class="card-title" id="Name1">Christopher Demeke</span>
-                            <p>I grew up in Houston and went to school for engineering in Austin “Hook’em Horns”.  A few things about me is I like sports mainly basketball and soccer. I love to read fiction any thing in the Geek, Nerd, Adventure spectrum if your looking for recommendations just contact me.</p>
+                            <p>I grew up in Houston and went to school for engineering in Austin “Hook’em Horns”. A few things
+                                about me is I like sports mainly basketball and soccer. I love to read fiction any thing
+                                in the Geek, Nerd, Adventure spectrum if your looking for recommendations just contact me.</p>
                         </div>
                         <div class="card-action">
                             <div>
@@ -143,7 +157,9 @@
                         </div>
                         <div class="card-content">
                             <span class="card-title" id="Name1">Kathy Kennedy</span>
-                            <p>I have always loved problem-solving and design, and I possess an incessant desire to learn. I graduated from UT Austin with a degree in Architecture. I am a member of the software team for an engineering firm in the oil and gas industry.</p>
+                            <p>I have always loved problem-solving and design, and I possess an incessant desire to learn. I
+                                graduated from UT Austin with a degree in Architecture. I am a member of the software team
+                                for an engineering firm in the oil and gas industry.</p>
                         </div>
                         <div class="card-action">
                             <div>
@@ -182,9 +198,6 @@
         </div>
 
 
-
-
-
         <!-- JQuery -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -196,6 +209,12 @@
 
         <!-- Firebase Authentication -->
         <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
+        
+        <script>
+                $(document).ready(function(){
+              $('.button-collapse').sideNav();
+            });
+        </script>
 
         <!-- Google Maps API  -->
         <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7qKO6Pu0BX0_Hh7xtqJrFBqCR1hxegDo&callback=initMap" async

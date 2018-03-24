@@ -3,6 +3,8 @@
 //     $('.carousel').carousel();
 
 // });
+
+
 // Global Variables
 var wikiPageTitle1;
 var wikiTitleParsed;
@@ -76,8 +78,8 @@ $(function () {
     populateCommunityMarkers();
 
     // this makes the side bar open in mobile view
-    $(".button-collapse").sideNav();
-
+     $(".button-collapse").sideNav();
+    // $('.sidenav').sidenav();
     //bind left-scroll button to animation
     $("#left-scroll").bind("mousedown", function () {
         $("#tm-feed").animate({ scrollLeft: $("#tm-feed").scrollLeft() - 300 }, 500);
@@ -429,7 +431,7 @@ function setMarkerInfo(marker, message) {
         gm_infowindow.open(gm_map, marker);
     });
 }
-
+ 
 function getMarkerInfo (marker) {
     var dbkey = getMarkerDatabaseCommentKey(marker);
     var message = gm_message;

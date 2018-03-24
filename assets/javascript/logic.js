@@ -3,6 +3,8 @@
 //     $('.carousel').carousel();
 
 // });
+
+
 // Global Variables
 var wikiPageTitle1;
 var wikiTitleParsed;
@@ -76,8 +78,8 @@ $(function () {
     populateCommunityMarkers();
 
     // this makes the side bar open in mobile view
-    $(".button-collapse").sideNav();
-
+     $(".button-collapse").sideNav();
+    // $('.sidenav').sidenav();
     //bind left-scroll button to animation
     $("#left-scroll").bind("mousedown", function () {
         $("#tm-feed").animate({ scrollLeft: $("#tm-feed").scrollLeft() - 300 }, 500);
@@ -173,12 +175,18 @@ autoplay();
                     tmA1Info.attr("href", eventLink);
                     tmA1Info.attr("target", "_blank");
                     tmA1Info.text("FIND TICKETS");
+                    var ticketIcon = $("<i>");
+                    ticketIcon.addClass("fas fa-ticket-alt");
+                    tmA1Info.append(ticketIcon);
 
                     var tmA2Info = $("<a>");
                     tmA2Info.addClass("btn waves-effect waves-teal align-center tm-ticket-btn");
                     tmA2Info.attr("href", shareLink);
                     tmA2Info.attr("target", "_blank");
                     tmA2Info.text("TELL FRIENDS");
+                    var fbIcon = $("<i>");
+                    fbIcon.addClass("fab fa-facebook");
+                    tmA2Info.append(fbIcon);
 
                     tmDivImg.append(tmImg);
                     tmSpanTitle.append(tmIcon);
@@ -429,7 +437,7 @@ function setMarkerInfo(marker, message) {
         gm_infowindow.open(gm_map, marker);
     });
 }
-
+ 
 function getMarkerInfo (marker) {
     var dbkey = getMarkerDatabaseCommentKey(marker);
     var message = gm_message;

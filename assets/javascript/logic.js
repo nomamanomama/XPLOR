@@ -175,12 +175,18 @@ autoplay();
                     tmA1Info.attr("href", eventLink);
                     tmA1Info.attr("target", "_blank");
                     tmA1Info.text("FIND TICKETS");
+                    var ticketIcon = $("<i>");
+                    ticketIcon.addClass("fas fa-ticket-alt");
+                    tmA1Info.append(ticketIcon);
 
                     var tmA2Info = $("<a>");
                     tmA2Info.addClass("btn waves-effect waves-teal align-center tm-ticket-btn");
                     tmA2Info.attr("href", shareLink);
                     tmA2Info.attr("target", "_blank");
                     tmA2Info.text("TELL FRIENDS");
+                    var fbIcon = $("<i>");
+                    fbIcon.addClass("fab fa-facebook");
+                    tmA2Info.append(fbIcon);
 
                     tmDivImg.append(tmImg);
                     tmSpanTitle.append(tmIcon);

@@ -272,7 +272,7 @@ autoplay();
         }).then(function () {
             $.ajax({
                 type: "GET",
-                url: 'http://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&section=0&page=' + wikiPageTitle1 + '&callback=?',
+                url: 'https://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&section=0&page=' + wikiPageTitle1 + '&callback=?',
                 contentType: "application/json; charset=utf-8",
                 async: false,
                 dataType: "json",
@@ -481,7 +481,7 @@ function initMap() {
     });
 
     gm_lilman_image = {
-        url: './assets/images/windsock.png',
+        url: './assets/images/windsock-v5.png',
         // This marker is 32 pixels wide by 32 pixels high.
         size: new google.maps.Size(50, 50),
         // The origin for this image is (0, 0).

@@ -66,6 +66,7 @@
             <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
         </div>
     </div>
+
     <!-- SEARCH BAR -->
     <div class="row" id="gm-row">
         <div class="input-field col" id="gm-scearchbar"></div>
@@ -78,8 +79,13 @@
                         <!-- <input 
                             id="gm-input" 
                             type="tel"  -->
-                        <input class="validate" id="gm-input-location" type="text" title="City Name, 2-Digit State or Country" pattern="(([0-9]{5})|([\w ]+, [\w]+))">
-                        <label for="gm-input-location">City, State/Country</label>
+                        <form>
+                            <div id="the-basics" class="validate">
+                                <input class="typeahead" id="gm-input-location" type="text" title="City Name, 2-Digit State or Country" pattern="(([0-9]{5})|([\w ]+, [\w]+))">
+                                <input class="btn waves-effect waves-light btn-small" type="submit" />
+                            </div>
+                        </form>
+                        <!-- <label for="gm-input-location">City, State/Country</label> -->
                     </div>
                 </div>
             </div>
@@ -207,7 +213,8 @@
         </div>
     </div>
 
-
+    <!-- link to list of city states -->
+    <script src="./assets/javascript/cityStates.js"></script>
 
     <!-- Number to Words -->
     <script type="text/javascript" src="./assets/javascript/numberToWords.min.js"></script>
@@ -227,6 +234,9 @@
     <!-- Google Maps API  -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7qKO6Pu0BX0_Hh7xtqJrFBqCR1hxegDo&callback=initMap" async
         defer></script>
+
+    <!-- JavaScript File -->
+    <script src="./assets/javascript/typeahead.jquery.js"></script>
 
     <!-- JavaScript File -->
     <script src="./assets/javascript/logic.js"></script>

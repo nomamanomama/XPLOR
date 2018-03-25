@@ -276,6 +276,18 @@ height: 400px;
     padding-left:7px;
 }
 
+#hideSubmit{
+    display:none;
+}
 
+#the-basics {
+    margin-left: 40px;
+}
 
- 
+.tt-menu {
+    background-color: rgb(237, 247, 246, .7);
+    padding: 5px;
+    font-size:18px;
+    letter-spacing: 1px;
+}
+

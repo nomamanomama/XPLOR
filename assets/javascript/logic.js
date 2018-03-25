@@ -230,7 +230,7 @@ autoplay();
             var srsearch = zipCode;
         }
         $.getJSON('https://en.wikipedia.org/w/api.php?format=' + format + '&action=' + action + '&list=' + list + '&srprop=' + prop + '&srlimit=' + sizeWiki + '&srsearch=' + srsearch + '&callback=?', function (data) {
-            // console.log(data);
+            console.log(data);
 
             wikiPageTitle1 = data.query.search[0].title;
             wikiTitleParsed = wikiPageTitle1.split(' ').join('_');

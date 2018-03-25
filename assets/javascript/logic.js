@@ -40,7 +40,7 @@ var uiConfig = {
         uiShown: function () {
             // The widget is rendered.
             // Hide the loader.
-            $('#loader').css({"display":"none"});
+            $('#loader').css({ "display": "none" });
         }
     },
     // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
@@ -78,7 +78,7 @@ $(function () {
     populateCommunityMarkers();
 
     // this makes the side bar open in mobile view
-     $(".button-collapse").sideNav();
+    $(".button-collapse").sideNav();
     // $('.sidenav').sidenav();
     //bind left-scroll button to animation
     $("#left-scroll").bind("mousedown", function () {
@@ -97,8 +97,8 @@ $(function () {
     //activate character count for add communitycomment form
     $('input#commentBy, textarea#commentMsg').characterCounter();
 
-//autoplays the small facts from wiki
-autoplay();
+    //autoplays the small facts from wiki
+    autoplay();
     function autoplay() {
         $('.carousel').carousel('next');
         setTimeout(autoplay, 6500);
@@ -222,7 +222,7 @@ autoplay();
         var exlimit = "max";
         var list = "search";
 
-        var srsearch ;
+        var srsearch;
         // console.log(cityCode, stateCode);
         if (InputType === 1) {
             var srsearch = cityCode + "+" + stateCode;
@@ -272,7 +272,7 @@ autoplay();
                 wpSCDiv1.append(wpSCH1, wpSCSpanInfo, wpSCDiv2);
                 wpSCA.append(wpSCDiv1);
                 $(".carousel").append(wpSCA);
-                
+
 
             }
             // $('.carousel').carousel({fullWidth: true});
@@ -324,7 +324,7 @@ autoplay();
                     wpDiv2.append(wpSpanTitle, wpDivInfo, wpDiv3);
                     wpDiv1.append(wpDiv2);
                     $("#wp-feed").append(wpDiv1);
-                    
+
                 },
                 error: function (errorMessage) {
                 }
@@ -337,13 +337,16 @@ autoplay();
     // ---------------------
     $("form").on("submit", function (e) {
         event.preventDefault();
-        var location = $("input").val();
+        var location = $("#gm-input-location").val();
+        console.log(location); 
         regexp1 = /[\w ]+, \w{2}/;
         regexp2 = /\d{5}/;
         // console.log(location);
         // console.log(regexp1.test(location))
         // console.log(regexp2.test(location))
 
+
+        //if the state code is longer than 2 letters, hide ticket master section
         if (regexp1.test(location)) {
             console.log("city, state");
             location = location.split(",");
@@ -352,11 +355,13 @@ autoplay();
             InputType = 1;
             console.log(stateCode.length);
             console.log(stateCode);
-            
-            
             $("#tm-row").hide();
+            // if there is a two letter state code, show ticket master
+
             if (stateCode.length === 3) {
-                $("#tm-row").show();}
+                $("#tm-row").show();
+            }
+
         } else if (regexp2.test(location)) {
             $("#tm-row").show();
             // console.log("zip");
@@ -364,7 +369,7 @@ autoplay();
             InputType = 2;
         }
 
-        
+
 
         findGeo(cityCode + "," + stateCode);
         findTickets();
@@ -383,12 +388,12 @@ autoplay();
         var message = gm_message;
         message.name = $("#commentBy").val();
         message.comment = $("textarea#commentMsg").val();
-        console.log ("marker info: " + message.comment);
+        console.log("marker info: " + message.comment);
         $(".modal").modal('close');
         //update the content in the infowindow attached to marker
-        if (message.comment === ""){
+        if (message.comment === "") {
             message.comment = "Pinned Location";
-        } 
+        }
         setMarkerInfo(gm_marker, message);
         $("#commentForm").reset();
     });
@@ -419,15 +424,15 @@ function setMarkerInfo(marker, message) {
     //console.log(marker + ", Message: " + message);
     var dbkey = getMarkerDatabaseCommentKey(marker);
     console.log("Setting db for marker: " + dbkey);
-    var d = new Date();  
+    var d = new Date();
     message.date = d.getMonth() + "/" + d.getDate() + "/" + d.getFullYear();
-    
-    if(message.name === ""){ 
+
+    if (message.name === "") {
         message.name = "anon";
     }
 
     console.log("date: " + message.date + " name: " + message.name + " message: " + message.comment);
-    db.ref('comments/' + dbkey).push({"comment": message.comment, "date": message.date, "by": message.name});
+    db.ref('comments/' + dbkey).push({ "comment": message.comment, "date": message.date, "by": message.name });
 
     //create empty content window
     var gm_infowindow = new google.maps.InfoWindow({
@@ -437,20 +442,20 @@ function setMarkerInfo(marker, message) {
         gm_infowindow.open(gm_map, marker);
     });
 }
- 
-function getMarkerInfo (marker) {
+
+function getMarkerInfo(marker) {
     var dbkey = getMarkerDatabaseCommentKey(marker);
     var message = gm_message;
     var info = [];
     db.ref('comments/' + dbkey).once("value", function (snapshot) {
-        if(snapshot.val()){
+        if (snapshot.val()) {
             snapshot.val().forEach(element => {
                 message.comment = JSON.parse(snapshot.val().element.comments);
-                message.date = snapshot.val().element.date; 
+                message.date = snapshot.val().element.date;
                 message.name = snapshot.val().element.name;
                 info.push(message);
             });
-            
+
         }
     });
     return info;
@@ -543,13 +548,13 @@ function addCommunityMarker(lat, lng) {
     });
     //update screen to show marker
     gm_marker = new google.maps.Marker({
-         position: gm_searchLocation,
-         map: gm_map,
-         icon: gm_lilman_image,
-         shape: gm_lilman_shape
+        position: gm_searchLocation,
+        map: gm_map,
+        icon: gm_lilman_image,
+        shape: gm_lilman_shape
     });
 
-    
+
 }
 
 //get existing favorites from database community key
@@ -565,7 +570,7 @@ function populateCommunityMarkers() {
             if (snapshot.val().community) {
                 //get list of locations to create markers
                 gm_markers = JSON.parse(snapshot.val().community);
-                
+
                 //create google markers to display in community map
                 gm_markers.forEach(element => {
                     var latLng = element.split(",");
@@ -578,9 +583,9 @@ function populateCommunityMarkers() {
                     });
                     var dbkey = getMarkerDatabaseCommentKey(marker);
                     //get comment from db for this location if it exists
-                    var exists = snapshot.child("comments/"+dbkey).exists();
-                    
-                    if (exists){
+                    var exists = snapshot.child("comments/" + dbkey).exists();
+
+                    if (exists) {
                         //var markerComments = snapshot.child('comments/' + dbkey).val();
                         var numComments = snapshot.child('comments/' + dbkey).numChildren();
                         console.log(numComments + " comments exist for key: " + dbkey);
@@ -588,23 +593,23 @@ function populateCommunityMarkers() {
                         snapshot.child("comments/" + dbkey).forEach(childSnapshot => {
                             arr.push(childSnapshot.val());
                         });
-                        console.log (arr);
+                        console.log(arr);
                         var comment = '';
                         arr.forEach(element => {
                             comment += element.comment + ", by: " + element.by + " " + element.date + "\n\r";
                         });
-                        
+
                     }
-                    
+
                     //TODO: add a link in info window to add comment
                     //gm_markerContent += "<a href='#'>add comment</a>";
-                    
+
                     //create info window for markers
                     var gm_infowindow = new google.maps.InfoWindow({
                         content: comment
                     });
                     //add event listener to show info window on click
-                    marker.addListener('click', function (){
+                    marker.addListener('click', function () {
                         //console.log(infowindow);
                         gm_infowindow.open(gm_map, marker);
                     });
@@ -614,15 +619,232 @@ function populateCommunityMarkers() {
     }
 }
 
-function getMarkerDatabaseCommentKey (marker){
+function getMarkerDatabaseCommentKey(marker) {
     var lat = marker.getPosition().lat();
     var lng = marker.getPosition().lng();
     var key = lat.toString() + "," + lng.toString();
     console.log(key);
-    key = key.replace(/\.\s?/g,"Z");
+    key = key.replace(/\.\s?/g, "Z");
     console.log("Key: " + key);
     return key;
 }
+
+
+//this is for the typeahead
+
+var substringMatcher = function (strs) {
+    return function findMatches(q, cb) {
+        var matches, substringRegex;
+
+        // an array that will be populated with substring matches
+        matches = [];
+
+        // regex used to determine if a string contains the substring `q`
+        substrRegex = new RegExp(q, 'i');
+
+        // iterate through the pool of strings and for any string that
+        // contains the substring `q`, add it to the `matches` array
+        $.each(strs, function (i, str) {
+            if (substrRegex.test(str)) {
+                matches.push(str);
+            }
+        });
+
+        cb(matches);
+    };
+};
+
+var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
+    'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',
+    'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
+    'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
+    'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
+    'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
+    'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
+    'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
+    'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+];
+
+
+var cityStCodes = [];
+for (var i = 0; i < cityStates.length; i++) {
+    var tempStr;
+    tempStr = cityStates[i].city;
+    switch (cityStates[i].state) {
+        case "Alabama":
+            tempStr = tempStr + ", AL";
+            break;
+        case "Alaska":
+            tempStr = tempStr + ", AK";
+            break;
+        case "Arizona":
+            tempStr = tempStr + ", AZ";
+            break;
+        case "Arkansas":
+            tempStr = tempStr + ", AR";
+            break;
+        case "California":
+            tempStr = tempStr + ", CA";
+            break;
+        case "Colorado":
+            tempStr = tempStr + ", CO";
+            break;
+        case "Connecticut":
+            tempStr = tempStr + ", CT";
+            break;
+        case "Delaware":
+            tempStr = tempStr + ", DE";
+            break;
+        case "Florida":
+            tempStr = tempStr + ", FL";
+            break;
+        case "Georgia":
+            tempStr = tempStr + ", GA";
+            break;
+        case "Hawaii":
+            tempStr = tempStr + ", HI";
+            break;
+        case "Idaho":
+            tempStr = tempStr + ", ID";
+            break;
+        case "Illinois":
+            tempStr = tempStr + ", IL";
+            break;
+        case "Indiana":
+            tempStr = tempStr + ", IN";
+            break;
+        case "Iowa":
+            tempStr = tempStr + ", IA";
+            break;
+        case "Kansas":
+            tempStr = tempStr + ", KS";
+            break;
+        case "Kentucky":
+            tempStr = tempStr + ", KY";
+            break;
+        case "Louisiana":
+            tempStr = tempStr + ", LA";
+            break;
+        case "Maine":
+            tempStr = tempStr + ", ME";
+            break;
+        case "Maryland":
+            tempStr = tempStr + ", MD";
+            break;
+        case "Massachusetts":
+            tempStr = tempStr + ", MA";
+            break;
+        case "Michigan":
+            tempStr = tempStr + ", MI";
+            break;
+        case "Minnesota":
+            tempStr = tempStr + ", MN";
+            break;
+        case "Mississippi":
+            tempStr = tempStr + ", MS";
+            break;
+        case "Missouri":
+            tempStr = tempStr + ", MO";
+            break;
+        case "Montana":
+            tempStr = tempStr + ", MT";
+            break;
+        case "Nebraska":
+            tempStr = tempStr + ", NE";
+            break;
+        case "Nevada":
+            tempStr = tempStr + ", NV";
+            break;
+        case "New Hampshire":
+            tempStr = tempStr + ", NH";
+            break;
+        case "New Jersey":
+            tempStr = tempStr + ", NJ";
+            break;
+        case "New Mexico":
+            tempStr = tempStr + ", NM";
+            break;
+        case "New York":
+            tempStr = tempStr + ", NY";
+            break;
+        case "North Carolina":
+            tempStr = tempStr + ", NC";
+            break;
+        case "North Dakota":
+            tempStr = tempStr + ", ND";
+            break;
+        case "Ohio":
+            tempStr = tempStr + ", OH";
+            break;
+        case "Oklahoma":
+            tempStr = tempStr + ", OK";
+            break;
+        case "Oregon":
+            tempStr = tempStr + ", OR";
+            break;
+        case "Pennsylvania":
+            tempStr = tempStr + ", PA";
+            break;
+        case "Rhode Island":
+            tempStr = tempStr + ", RI";
+            break;
+        case "South Carolina":
+            tempStr = tempStr + ", SC";
+            break;
+        case "South Dakota":
+            tempStr = tempStr + ", SD";
+            break;
+        case "Tennessee":
+            tempStr = tempStr + ", TN";
+            break;
+        case "Texas":
+            tempStr = tempStr + ", TX";
+            break;
+        case "Utah":
+            tempStr = tempStr + ", UT";
+            break;
+        case "Vermont":
+            tempStr = tempStr + ", VT";
+            break;
+        case "Virginia":
+            tempStr = tempStr + ", VA";
+            break;
+        case "Washington":
+            tempStr = tempStr + ", WA";
+            break;
+        case "West Virginia":
+            tempStr = tempStr + ", WV";
+            break;
+        case "Wisconsin":
+            tempStr = tempStr + ", WI";
+            break;
+        case "Wyoming":
+            tempStr = tempStr + ", WY";
+    }
+    cityStCodes.push(tempStr);
+}
+
+
+
+$('#the-basics .typeahead').typeahead({
+    hint: true,
+    highlight: true,
+    minLength: 1
+},
+    {
+        name: 'cityStCodes',
+        source: substringMatcher(cityStCodes)
+    });
+
+
+//switch case through the states
+// function switchCaseStates (st,index){
+//     switch (st){
+//     case "Alabama":
+//     stateCodes
+//         break;
+//     }
+// }
 
 // function onMarkerClicked (marker, infowindow) {
 //     //console.log(infowindow);
